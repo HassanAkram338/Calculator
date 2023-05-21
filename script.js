@@ -1,78 +1,67 @@
-function getHistory(){
-	return document.getElementById("history-value").innerText;
+const display = document.getElementById('result');
+const buttons = document.querySelectorAll('button');
+let currentNumber = '';
+let previousNumber = '';
+let operator = '';
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (button.id === 'clear') {
+      clear();
+    } else if (button.id === 'equals') {
+      calculate();
+    } else if (button.classList.contains('operator')) {
+      handleOperator(button.id);
+    } else {
+      handleNumber(button.innerText);
+    }
+  });
+});
+
+function handleNumber(number) {
+  if (currentNumber === '0') {
+    currentNumber = number;
+  } else {
+    currentNumber += number;
+  }
+  display.innerText = currentNumber;
 }
-function printHistory(num){
-	document.getElementById("history-value").innerText=num;
+
+function handleOperator(op) {
+  if (operator !== '') {
+    calculate();
+  }
+  operator = op;
+  previousNumber = currentNumber;
+  currentNumber = '0';
 }
-function getOutput(){
-	return document.getElementById("output-value").innerText;
+
+function calculate() {
+  const num1 = parseFloat(previousNumber);
+  const num2 = parseFloat(currentNumber);
+  let result = 0;
+  switch (operator) {
+    case 'add':
+      result = num1 + num2;
+      break;
+    case 'subtract':
+      result = num1 - num2;
+      break;
+    case 'multiply':
+      result = num1 * num2;
+      break;
+    case 'divide':
+      result = num1 / num2;
+      break;
+  }
+  currentNumber = result.toString();
+  display.innerText = currentNumber;
+  operator = '';
 }
-function printOutput(num){
-	if(num==""){
-		document.getElementById("output-value").innerText=num;
-	}
-	else{
-		document.getElementById("output-value").innerText=getFormattedNumber(num);
-	}	
-}
-function getFormattedNumber(num){
-	if(num=="-"){
-		return "";
-	}
-	var n = Number(num);
-	var value = n.toLocaleString("en");
-	return value;
-}
-function reverseNumberFormat(num){
-	return Number(num.replace(/,/g,''));
-}
-var operator = document.getElementsByClassName("operator");
-for(var i =0;i<operator.length;i++){
-	operator[i].addEventListener('click',function(){
-		if(this.id=="clear"){
-			printHistory("");
-			printOutput("");
-		}
-		else if(this.id=="backspace"){
-			var output=reverseNumberFormat(getOutput()).toString();
-			if(output){//if output has a value
-				output= output.substr(0,output.length-1);
-				printOutput(output);
-			}
-		}
-		else{
-			var output=getOutput();
-			var history=getHistory();
-			if(output==""&&history!=""){
-				if(isNaN(history[history.length-1])){
-					history= history.substr(0,history.length-1);
-				}
-			}
-			if(output!="" || history!=""){
-				output= output==""?output:reverseNumberFormat(output);
-				history=history+output;
-				if(this.id=="="){
-					var result=eval(history);
-					printOutput(result);
-					printHistory("");
-				}
-				else{
-					history=history+this.id;
-					printHistory(history);
-					printOutput("");
-				}
-			}
-		}
-		
-	});
-}
-var number = document.getElementsByClassName("number");
-for(var i =0;i<number.length;i++){
-	number[i].addEventListener('click',function(){
-		var output=reverseNumberFormat(getOutput());
-		if(output!=NaN){ //if output is a number
-			output=output+this.id;
-			printOutput(output);
-		}
-	});
+
+function clear() {
+  currentNumber = '0';
+  previousNumber = '';
+  operator = '';
+  display.innerText = currentNumber;
 }

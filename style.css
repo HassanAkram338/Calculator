@@ -1,82 +1,68 @@
-body{
-	font-family: 'Open Sans',sans-serif;
-	background-color: black;
-}
-#container{
-	width: 1000px;
-	height: 550px;
-	background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(bgImg.jpg);
-	margin: 20px auto;	
-}
-#calculator{
-	width: 320px;
-	height: 520px;
-	background-color: #eaedef;
+.calculator {
+	width: 300px;
 	margin: 0 auto;
-	top: 20px;
-	position: relative;
-	border-radius: 5px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-#result{
-	height: 120px;
-}
-#history{
-	text-align: right;
-	height: 20px;
-	margin: 0 20px;
-	padding-top: 20px;
-	font-size: 15px;
-	color: #919191;
-}
-#output{
-	text-align: right;
+	background-color: #f2f2f2;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+  }
+  
+  .display {
 	height: 60px;
-	margin: 10px 20px;
-	font-size: 30px;
-}
-#keyboard{
-	height: 400px;
-}
-.operator, .number, .empty{
-	width: 50px;
-	height: 50px;
-	margin: 15px;
-	float: left;
-	border-radius: 50%;
-	border-width: 0;
+	background-color: #fff;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0 20px;
+	font-size: 24px;
 	font-weight: bold;
-	font-size: 15px;
-}
-.number, .empty{
-	background-color: #eaedef;
-}
-.number, .operator{
+  }
+  
+  .buttons {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 10px;
+	padding: 20px;
+  }
+  
+  button {
+	background-color: #fff;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	font-size: 24px;
+	font-weight: bold;
 	cursor: pointer;
-}
-.operator:active, .number:active{
-	font-size: 13px;
-}
-.operator:focus, .number:focus, .empty:focus{
-	outline: 0;
-}
-button:nth-child(4){
-	font-size: 20px;
-	background-color: #20b2aa;
-}
-button:nth-child(8){
-	font-size: 20px;
-	background-color: #ffa500;
-}
-button:nth-child(12){
-	font-size: 20px;
-	background-color: #f08080;
-}
-button:nth-child(16){
-	font-size: 20px;
-	background-color: #7d93e0;
-}
-button:nth-child(20){
-	font-size: 20px;
-	background-color: #9477af;
-}
+	transition: all 0.2s ease-in-out;
+  }
+  
+  button:hover {
+	background-color: #f2f2f2;
+  }
+  
+  .operator {
+	background-color: #ff8c00;
+	color: #fff;
+  }
+  
+  .operator:hover {
+	background-color: #ff6600;
+  }
+  
+  #equals {
+	background-color: #4caf50;
+	color: #fff;
+  }
+  
+  #equals:hover {
+	background-color: #388e3c;
+  }
+  
+  #clear {
+	background-color: #f44336;
+	color: #fff;
+  }
+  
+  #clear:hover {
+	background-color: #d32f2f;
+  }
